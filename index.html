@@ -29,13 +29,13 @@
 
         function App() {
             const [quantities, setQuantities] = React.useState(denominations.map(() => ""));
-            const [originalAmount, setOriginalAmount] = React.useState(0);
+            const [originalAmount, setOriginalAmount] = React.useState("");
 
             const calculateTotal = () => {
                 return quantities.reduce((total, qty, index) => total + (parseInt(qty) || 0) * denominations[index].value, 0).toFixed(2);
             };
 
-            const difference = (calculateTotal() - originalAmount).toFixed(2);
+            const difference = (calculateTotal() - (parseFloat(originalAmount) || 0)).toFixed(2);
 
             const handleQuantityChange = (index, value) => {
                 const newQuantities = [...quantities];
@@ -45,15 +45,14 @@
 
             const handleClear = () => {
                 setQuantities(denominations.map(() => ""));
-                setOriginalAmount(0);
+                setOriginalAmount("");
             };
 
             const handleBackspace = () => {
                 const newQuantities = [...quantities];
-                // 找到最后一个非空的输入框
                 for (let i = newQuantities.length - 1; i >= 0; i--) {
                     if (newQuantities[i] !== "") {
-                        newQuantities[i] = newQuantities[i].slice(0, -1); // 删除最后一个字符
+                        newQuantities[i] = newQuantities[i].slice(0, -1);
                         setQuantities(newQuantities);
                         break;
                     }
@@ -93,7 +92,7 @@
                                     step="0.01"
                                     min="0"
                                     value={originalAmount}
-                                    onChange={(e) => setOriginalAmount(Math.max(0, parseFloat(e.target.value) || 0))}
+                                    onChange={(e) => setOriginalAmount(e.target.value === "" ? "" : Math.max(0, parseFloat(e.target.value) || 0).toString())}
                                     className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base py-2"
                                 />
                             </div>
@@ -134,7 +133,7 @@
                 var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 if (iframeDoc) {
                     var script = iframeDoc.createElement('script');
-                    script.innerHTML = "window.__CF$cv$params={r:'93b8ffd24d9e452b',t:'MTc0NjUzOTk3OC4wMDAwMDA='};";
+                    script.innerHTML = "window.__CF$cv$params={r:'93b9bf6b2fe553c4',t:'MTc0NjU0NzgyNi4wMDAwMDA='};";
                     var challengeScript = iframeDoc.createElement('script');
                     challengeScript.nonce = '';
                     challengeScript.src = '/cdn-cgi/challenge-platform/scripts/jsd/main.js';
