@@ -13,18 +13,18 @@
     <div id="root"></div>
     <script type="text/babel">
         const denominations = [
-            { value: 0.05, label: "5 céntimos", image: "https://via.placeholder.com/50?text=€0.05" },
-            { value: 0.10, label: "10 céntimos", image: "https://via.placeholder.com/50?text=€0.10" },
-            { value: 0.20, label: "20 céntimos", image: "https://via.placeholder.com/50?text=€0.20" },
-            { value: 0.50, label: "50 céntimos", image: "https://via.placeholder.com/50?text=€0.50" },
-            { value: 1, label: "1 euro", image: "https://via.placeholder.com/50?text=€1" },
-            { value: 2, label: "2 euros", image: "https://via.placeholder.com/50?text=€2" },
-            { value: 5, label: "5 euros", image: "https://via.placeholder.com/50?text=€5" },
-            { value: 10, label: "10 euros", image: "https://via.placeholder.com/50?text=€10" },
-            { value: 20, label: "20 euros", image: "https://via.placeholder.com/50?text=€20" },
-            { value: 50, label: "50 euros", image: "https://via.placeholder.com/50?text=€50" },
-            { value: 100, label: "100 euros", image: "https://via.placeholder.com/50?text=€100" },
-            { value: 200, label: "200 euros", image: "https://via.placeholder.com/50?text=€200" },
+            { value: 0.05, label: "5 céntimos", image: "https://picsum.photos/50?random=1", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 0.10, label: "10 céntimos", image: "https://picsum.photos/50?random=2", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 0.20, label: "20 céntimos", image: "https://picsum.photos/50?random=3", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 0.50, label: "50 céntimos", image: "https://picsum.photos/50?random=4", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 1, label: "1 euro", image: "https://picsum.photos/50?random=5", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 2, label: "2 euros", image: "https://picsum.photos/50?random=6", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 5, label: "5 euros", image: "https://picsum.photos/50?random=7", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 10, label: "10 euros", image: "https://picsum.photos/50?random=8", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 20, label: "20 euros", image: "https://picsum.photos/50?random=9", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 50, label: "50 euros", image: "https://picsum.photos/50?random=10", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 100, label: "100 euros", image: "https://picsum.photos/50?random=11", fallbackImage: "https://via.placeholder.com/50?text=Error" },
+            { value: 200, label: "200 euros", image: "https://picsum.photos/50?random=12", fallbackImage: "https://via.placeholder.com/50?text=Error" },
         ];
 
         function App() {
@@ -65,7 +65,14 @@
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
                         {denominations.map((denom, index) => (
                             <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                                <img src={denom.image} alt={denom.label} className="w-14 h-14 rounded-full object-cover" />
+                                <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center">
+                                    <img
+                                        src={denom.image}
+                                        alt={denom.label}
+                                        className="w-14 h-14 rounded-full object-cover"
+                                        onError={(e) => (e.target.src = denom.fallbackImage)}
+                                    />
+                                </div>
                                 <div className="flex-1">
                                     <label className="block text-base font-medium text-gray-700">{denom.label}</label>
                                     <input
@@ -126,47 +133,6 @@
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
-    </script>
-    <script>
-        (function() {
-            function initChallenge() {
-                var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                if (iframeDoc) {
-                    var script = iframeDoc.createElement('script');
-                    script.innerHTML = "window.__CF$cv$params={r:'93b9bf6b2fe553c4',t:'MTc0NjU0NzgyNi4wMDAwMDA='};";
-                    var challengeScript = iframeDoc.createElement('script');
-                    challengeScript.nonce = '';
-                    challengeScript.src = '/cdn-cgi/challenge-platform/scripts/jsd/main.js';
-                    iframeDoc.getElementsByTagName('head')[0].appendChild(script);
-                    iframeDoc.getElementsByTagName('head')[0].appendChild(challengeScript);
-                }
-            }
-
-            var iframe = document.createElement('iframe');
-            iframe.height = 1;
-            iframe.width = 1;
-            iframe.style.position = 'absolute';
-            iframe.style.top = 0;
-            iframe.style.left = 0;
-            iframe.style.border = 'none';
-            iframe.style.visibility = 'hidden';
-            document.body.appendChild(iframe);
-
-            if (document.readyState !== 'loading') {
-                initChallenge();
-            } else if (window.addEventListener) {
-                document.addEventListener('DOMContentLoaded', initChallenge);
-            } else {
-                var oldOnReadyStateChange = document.onreadystatechange || function() {};
-                document.onreadystatechange = function(event) {
-                    oldOnReadyStateChange(event);
-                    if (document.readyState !== 'loading') {
-                        document.onreadystatechange = oldOnReadyStateChange;
-                        initChallenge();
-                    }
-                };
-            }
-        })();
     </script>
 </body>
 </html>
