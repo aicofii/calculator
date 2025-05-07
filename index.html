@@ -80,7 +80,7 @@
                                         min="0"
                                         value={quantities[index]}
                                         onChange={(e) => handleQuantityChange(index, e.target.value)}
-                                        className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base py-2"
+                                        className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base py-2 pl-2"
                                     />
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                     min="0"
                                     value={originalAmount}
                                     onChange={(e) => setOriginalAmount(e.target.value === "" ? "" : Math.max(0, parseFloat(e.target.value) || 0).toString())}
-                                    className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base py-2"
+                                    className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base py-2 pl-2"
                                 />
                             </div>
                             <div>
